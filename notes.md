@@ -12,3 +12,11 @@ Header 1
 
 Header 2
 -------
+
+This is the first line.  
+This is the second line.  
+
+I just love **bold text**.
+I just love __bold text__.
+
+Love**is**bold.
