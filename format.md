@@ -38,3 +38,17 @@ Could do it ___like this___ aswell...
 >>> did you know?  
 > Not until now!
 
+
+- Unordered Lists
+- some item
+- some item
+
+1. Ordered List
+2. Some item
+    1. some intented item
+    2. some intented item
+3. another item
+    1. another intented item
+    2. another intented item
+
+
