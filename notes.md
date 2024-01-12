@@ -4,3 +4,11 @@
 #### Header 4
 ##### Header 5
 ###### Header 6
+
+Also:
+
+Header 1
+========
+
+Header 2
+-------
