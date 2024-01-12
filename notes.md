@@ -4,8 +4,9 @@
 
 ### Docker compose
 
-#### [LOG] watched yt-video about docker compose v2
-- https://www.youtube.com/watch?v=2MJn2yfa6A8&t=1235s
+#### [LOG]
+- watched yt-video about docker compose v2
+    - https://www.youtube.com/watch?v=2MJn2yfa6A8&t=1235s
 
 #### [GENERAL]
 - Docker compose migrated to Compose V2
@@ -23,7 +24,7 @@
 
 - to explicitly make a container module dependant on another
 
-    ` depends_on `
+    ` depends_on: `
 
 - Advise: No container names (name them via compose or env variables)
 - also dont specify ports for the same reason (have to find out how to do it else)
@@ -35,7 +36,8 @@
 
     ` profiles: ["name_of_profile"] `
 
-    ` compose ls `
+    ` docker compose ls `
 
-    ` compose cp `
+    ` docker compose cp `
 
+    ` docker compose convert `

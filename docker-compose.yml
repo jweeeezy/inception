@@ -1,14 +1,19 @@
+# Docker compose v2 file
+# no version cmd needed (if correct version)
 
 services:
+
 # nginx lightweight webserver container
   nginx:
     profiles: ["webserver"]
+
 # maria db database container
   mariadb:
     profiles: ["database"]
     depends_on:
       nginx:
         condition: service_healthy
+
 # wordpress frontend webpage container
   wordpress:
     profiles: ["frontend"]
