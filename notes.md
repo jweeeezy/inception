@@ -30,9 +30,11 @@
 - also dont specify ports for the same reason (have to find out how to do it else)
 - for local development you should use docker compose only (intented for workflow)
 
-- run all containers in detached (background) mode
+- run all containers in detached (background) mode and stop them
 
     ` docker compose up -d `
+
+    ` docker compose down `
 
 #### [COMPOSE v2 NEW FEATURES]
 
