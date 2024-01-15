@@ -30,6 +30,10 @@
 - also dont specify ports for the same reason (have to find out how to do it else)
 - for local development you should use docker compose only (intented for workflow)
 
+- run all containers in detached (background) mode
+
+    ` docker compose up -d `
+
 #### [COMPOSE v2 NEW FEATURES]
 
 - Service Profiles can built containers separately for debugging
