@@ -42,7 +42,7 @@
 
     ` docker compose convert `
 
-#### [DOCKER HANDLING]
+#### [DOCKER CONTAINER & IMAGE HANDLING]
 - first an image (via Dockerfile) is created 
 
     `docker build -t <name_of_image>`
@@ -51,7 +51,7 @@
 
     ` docker run --name <name_of_container> <name_of_image> `
 
-- you can attach to a container by
+- you can access/attach to a container shell by
 
     ` docker exec <name_of_container> /bin/bash `
 
@@ -75,6 +75,13 @@
     ` docker images -qa `
 
 #### [NGINX]
-- have to setup TLS which is a way to guarantee a secure connection between  
+- EXPOSE *PORT_NUMBER* for documentation in Dockerfile
+
+- locations for config files on debian
+    - /etc/nginx/nginx.conf
+    - /etc/nginx/conf.d
+    - /etc/nginx/sites_available/
+    - /etc/nginx/sites_enabled/
+
+- have to setup TLS which is a way to guarantee a secure connection between
 - two applications (mb OPEN SSL)
-- have to setup an IP-address and test it

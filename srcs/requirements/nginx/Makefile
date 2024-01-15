@@ -11,7 +11,7 @@ stop:
 build:
 				docker build . -t i_nginx
 run:
-				docker run -it --name c_nginx i_nginx
+				docker run -d -p 80:80 --name c_nginx i_nginx
 re:
 				$(MAKE) stop ; $(MAKE) rm ; $(MAKE) build
 
