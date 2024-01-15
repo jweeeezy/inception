@@ -42,3 +42,39 @@
 
     ` docker compose convert `
 
+#### [DOCKER HANDLING]
+- first an image (via Dockerfile) is created 
+
+    `docker build -t <name_of_image>`
+
+- with an image you can create a container and name it
+
+    ` docker run --name <name_of_container> <name_of_image> `
+
+- you can attach to a container by
+
+    ` docker exec <name_of_container> /bin/bash `
+
+- you can stop a (continously) running container by
+
+    ` docker stop <name_of_container> `
+
+- you can remove a container or image by
+
+    ` docker rm <name_of_container> `
+    ` docker rmi <name_of_image> `
+
+- you can see all containers or images by
+
+    ` docker ps -a `
+    ` docker images `
+
+- you can get all ids of containers or images by (useful for scripting)
+
+    ` docker ps -qa `
+    ` docker images -qa `
+
+#### [NGINX]
+- have to setup TLS which is a way to guarantee a secure connection between  
+- two applications (mb OPEN SSL)
+- have to setup an IP-address and test it
