@@ -62,16 +62,19 @@
 - you can remove a container or image by
 
     ` docker rm <name_of_container> `
+
     ` docker rmi <name_of_image> `
 
 - you can see all containers or images by
 
     ` docker ps -a `
+
     ` docker images `
 
 - you can get all ids of containers or images by (useful for scripting)
 
     ` docker ps -qa `
+
     ` docker images -qa `
 
 #### [NGINX]
