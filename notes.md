@@ -83,6 +83,10 @@
 
     ` docker images -qa `
 
+- you can show all logs of detached containers by
+
+    ` docker logs <name_of_container> `
+
 #### [NGINX]
 - EXPOSE *PORT_NUMBER* for documentation in Dockerfile
 
