@@ -8,7 +8,7 @@ RUN apt-get install nginx -y
 # RUN apt-get update -y && apt-get install tree -y
 # RUN apt-get update -y && apt-get install vim -y
 
-EXPOSE 80
+EXPOSE 443
 
 # starts nginx as a foreground process without the daemon so it keeps running
 CMD ["nginx", "-g", "daemon off;"]
