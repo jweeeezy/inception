@@ -1,23 +1,26 @@
 # Docker compose v2 file
 # no version cmd needed (if correct version)
 
-services:
+# @note debugging: could use profiles with prebuild images
 
-# nginx lightweight webserver container
-  nginx:
-    profiles: ["webserver"]
+services:
+  nginx: # lightweight webserver
+    build:
+      context: ./srcs/requirements/nginx
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    restart: always # ensures container always runs and restarts (crash / stop)
 
 # maria db database container
-  mariadb:
-    profiles: ["database"]
-    depends_on:
-      nginx:
-        condition: service_healthy
+#  mariadb:
+#    depends_on:
+#      nginx:
+#        condition: service_healthy
 
-# wordpress frontend webpage container
-  wordpress:
-    profiles: ["frontend"]
-    depends_on:
-      mariadb:
-        condition: service_healthy
+## wordpress frontend webpage container
+#  wordpress:
+#    depends_on:
+#      mariadb:
+#        condition: service_healthy
 
