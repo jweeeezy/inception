@@ -92,9 +92,11 @@
 
 - locations for config files on debian
     - /etc/nginx/nginx.conf
-    - /etc/nginx/conf.d
+    - /etc/nginx/conf.d/
     - /etc/nginx/sites_available/
     - /etc/nginx/sites_enabled/
+
+> location of own config file: /etc/nginx/cond.d/**custom-nginx.cong**
 
 - have to setup TLS which is a way to guarantee a secure connection between
 - two applications (mb OPEN SSL)
