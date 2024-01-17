@@ -8,7 +8,7 @@
 - watched yt-video about docker compose v2
     - https://www.youtube.com/watch?v=2MJn2yfa6A8&t=1235s
 
-#### [GENERAL]
+#### [DOCKER COMPOSE]
 - Docker compose migrated to Compose V2
 (version 3. and older are called Compose V1)
 - there is a difference between docker-compose(old) and docker compose (new)
@@ -86,6 +86,21 @@
 - you can show all logs of detached containers by
 
     ` docker logs <name_of_container> `
+
+#### [DOCKER NETWORK]
+
+- you can create a network by
+
+    ` docker network create <name_of_network> `
+
+- you can add a container to a network by using the docker run cli
+
+>   docker run -d \  
+>   -p *PORT_NUMBER*-*PORT_NUMBER* \  
+>   -e ENV_VAR=SOMETHING \  
+>   --net <name_of_network> \  
+>   --name <name_of_container> \  
+>   <name_of_image>
 
 #### [NGINX]
 - EXPOSE *PORT_NUMBER* for documentation in Dockerfile
