@@ -96,8 +96,8 @@
 - you can add a container to a network by using the docker run cli
 
 >   docker run -d \  
->   -p *PORT_NUMBER*-*PORT_NUMBER* \  
->   -e ENV_VAR=SOMETHING \  
+>   -p *PORT_NUMBER*:*PORT_NUMBER* \  
+>   -e ENV_VAR=something \  
 >   --net <name_of_network> \  
 >   --name <name_of_container> \  
 >   <name_of_image>
