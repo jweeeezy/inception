@@ -7,6 +7,8 @@
 #### [LOG]
 - watched yt-video about docker compose v2
     - https://www.youtube.com/watch?v=2MJn2yfa6A8&t=1235s
+- watched video about docker and docker compose workflow
+    - https://www.youtube.com/watch?v=3c-iBn73dDE&t=3041s
 
 #### [DOCKER COMPOSE]
 - Docker compose migrated to Compose V2
@@ -25,6 +27,11 @@
 - to explicitly make a container module dependant on another
 
     ` depends_on: `
+
+- to setup ENV variables
+
+    ` environment: `
+    ` - SOME_ENV_VAR=SOME_ENV_VAR_VALUE `
 
 - Advise: No container names (name them via compose or env variables)
 - also dont specify ports for the same reason (have to find out how to do it else)
@@ -89,9 +96,15 @@
 
 #### [DOCKER NETWORK]
 
+- **compose automatically creates a network between the containers!**
+
 - you can create a network by
 
     ` docker network create <name_of_network> `
+
+- you can see running networks by
+
+    ` docker network ls `
 
 - you can add a container to a network by using the docker run cli
 
@@ -111,7 +124,7 @@
     - /etc/nginx/sites_available/
     - /etc/nginx/sites_enabled/
 
-> location of own config file: /etc/nginx/cond.d/**custom-nginx.cong**
+> location of own config file: /etc/nginx/cond.d/**custom-nginx.conf**
 
 - have to setup TLS which is a way to guarantee a secure connection between
 - two applications (mb OPEN SSL)
