@@ -115,6 +115,10 @@
 >   --name <name_of_container> \  
 >   <name_of_image>
 
+#### [LEMP Stack]
+- guide for LEMP stack with wordpress: (not read)
+https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-on-ubuntu-20-04
+
 #### [NGINX]
 - EXPOSE *PORT_NUMBER* for documentation in Dockerfile
 
@@ -128,3 +132,7 @@
 
 - have to setup TLS which is a way to guarantee a secure connection between
 - two applications (mb OPEN SSL)
+
+- guide for generating ssl cert/key for nginx: (not read)
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04
+
