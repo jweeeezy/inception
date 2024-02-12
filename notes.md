@@ -41,6 +41,8 @@
 
     ` docker compose up -d `
 
+    ` docker compose up --build `
+
     ` docker compose down `
 
 #### [COMPOSE v2 NEW FEATURES]
