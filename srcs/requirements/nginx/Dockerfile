@@ -4,13 +4,10 @@ FROM debian:11
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install nginx -y
 
+RUN mkdir ssl
+
 COPY custom-nginx.conf /etc/nginx/conf.d/
 
-# @note delete before submit
-# RUN apt-get update -y && apt-get install tree -y
-# RUN apt-get update -y && apt-get install vim -y
-
-# @note not sure if needed
 #EXPOSE 443
 
 # starts nginx as a foreground process without the daemon so it keeps running
