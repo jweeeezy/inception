@@ -2,13 +2,13 @@
 
 ## Makefile<->Docker compose<->Dockerfile
 
-### Docker compose
-
 #### [LOG]
 - watched yt-video about docker compose v2
     - https://www.youtube.com/watch?v=2MJn2yfa6A8&t=1235s
 - watched video about docker and docker compose workflow
     - https://www.youtube.com/watch?v=3c-iBn73dDE&t=3041s
+- watched yt video about nginx and certificates
+    - https://www.youtube.com/watch?v=xNk8fZCuCMU&t=312s
 
 #### [DOCKER COMPOSE]
 - Docker compose migrated to Compose V2
@@ -45,8 +45,6 @@
 
     ` docker compose down `
 
-#### [COMPOSE v2 NEW FEATURES]
-
 - Service Profiles can built containers separately for debugging
 
     ` profiles: ["name_of_profile"] `
@@ -57,10 +55,13 @@
 
     ` docker compose convert `
 
+#### [DOCKERFILE]
+- apt-get instead of apt?
+
 #### [DOCKER CONTAINER & IMAGE HANDLING]
 - first an image (via Dockerfile) is created 
 
-    `docker build -t <name_of_image>`
+    ` docker build -t <name_of_image> `
 
 - with an image you can create a container and name it
 
@@ -134,7 +135,19 @@ https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-l
 
 - have to setup TLS which is a way to guarantee a secure connection between
 - two applications (mb OPEN SSL)
+- @note nginx needs to know where certificates are (in config file)
+- e.g.: /etc/nginx/ssl/
 
 - guide for generating ssl cert/key for nginx: (not read)
 https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04
 
+#### [TSL/SSL Certification]
+- with the package of openssl you can generate keys, certificates
+- create a key for the host (password protected)
+    ` openssl genrsa -des3 -out inception.key 2048 `
+- create a signing request
+    ` openssl req -new -key inception.key -out inception.csr `
+- remove password protection
+    ` openssl rsa -in inceptionhost.key.pw -out inceptionhost.key `
+- sign our certificate
+    ` openssl x509 -req -in inceptionhost.csr -signkey inceptionhost.key -out inceptionhost.crt `

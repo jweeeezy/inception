@@ -9,7 +9,7 @@ services:
       context: ./srcs/requirements/nginx
       dockerfile: Dockerfile
     ports:
-      - 80:80
+      - 443:443
     restart: always # ensures container always runs and restarts (crash / stop)
 
 # maria db database container
