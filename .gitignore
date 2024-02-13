@@ -1,3 +1,4 @@
 
 #only allowed to store locally
 *.env
+ssl
