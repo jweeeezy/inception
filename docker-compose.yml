@@ -4,13 +4,19 @@
 # @note debugging: could use profiles with prebuild images
 
 services:
-  nginx: # lightweight webserver
+  #  nginx: # lightweight webserver
+  #    build:
+  #      context: ./srcs/requirements/nginx
+  #      dockerfile: Dockerfile
+  #    ports:
+  #      - 443:443
+  #    restart: always # ensures container always runs and restarts (crash / stop)
+
+  mariadb: # database server
     build:
-      context: ./srcs/requirements/nginx
+      context: ./srcs/requirements/mariadb
       dockerfile: Dockerfile
-    ports:
-      - 443:443
-    restart: always # ensures container always runs and restarts (crash / stop)
+        #restart: always
 
 # maria db database container
 #  mariadb:
