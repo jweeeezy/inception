@@ -31,11 +31,16 @@
 - to setup ENV variables
 
     ` environment: `
+
     ` - SOME_ENV_VAR=SOME_ENV_VAR_VALUE `
 
 - Advise: No container names (name them via compose or env variables)
 - also dont specify ports for the same reason (have to find out how to do it else)
 - for local development you should use docker compose only (intented for workflow)
+
+- way of syncing changes of files without needing to rebuild the image everytime
+
+    ` docker compose watch `
 
 - run all containers in detached (background) mode and stop them
 
@@ -145,10 +150,18 @@ https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl
 #### [TSL/SSL Certification]
 - with the package of openssl you can generate keys, certificates
 - create a key for the host (password protected)
+
     ` openssl genrsa -des3 -out inception.key 2048 `
+
 - create a signing request
+
     ` openssl req -new -key inception.key -out inception.csr `
+
 - remove password protection
+
     ` openssl rsa -in inceptionhost.key.pw -out inceptionhost.key `
+
 - sign our certificate
+
     ` openssl x509 -req -in inceptionhost.csr -signkey inceptionhost.key -out inceptionhost.crt `
+
