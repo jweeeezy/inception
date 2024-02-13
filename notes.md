@@ -57,6 +57,7 @@
 
 #### [DOCKERFILE]
 - apt-get instead of apt?
+- DEBIAN_FRONTEND=noninteractive (so user doesnt get prompted)
 
 #### [DOCKER CONTAINER & IMAGE HANDLING]
 - first an image (via Dockerfile) is created 
