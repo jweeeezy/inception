@@ -2,6 +2,8 @@
 
 # @note debugging: could use profiles with prebuild images
 
+# restart always ensures restart on error (health checks for example)
+
 services:
   nginx: # lightweight webserver
     build:
@@ -9,15 +11,15 @@ services:
       dockerfile: Dockerfile
     ports:
       - 443:443
-    restart: always # ensures container always runs and restarts (crash / stop)
+    restart: always
 
   mariadb: # database server
     build:
       context: ./srcs/requirements/mariadb
       dockerfile: Dockerfile
-        #restart: always
     volumes:
       - mariadb_data:/var/lib/mysql
+    restart: always
 
 volumes:
   mariadb_data:
