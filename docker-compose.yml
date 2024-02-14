@@ -4,25 +4,18 @@
 # @note debugging: could use profiles with prebuild images
 
 services:
-  #  nginx: # lightweight webserver
-  #    build:
-  #      context: ./srcs/requirements/nginx
-  #      dockerfile: Dockerfile
-  #    ports:
-  #      - 443:443
-  #    restart: always # ensures container always runs and restarts (crash / stop)
+  nginx: # lightweight webserver
+    build:
+      context: ./srcs/requirements/nginx
+      dockerfile: Dockerfile
+    ports:
+      - 443:443
+    restart: always # ensures container always runs and restarts (crash / stop)
 
   mariadb: # database server
     build:
       context: ./srcs/requirements/mariadb
       dockerfile: Dockerfile
-        #restart: always
-
-# maria db database container
-#  mariadb:
-#    depends_on:
-#      nginx:
-#        condition: service_healthy
 
 ## wordpress frontend webpage container
 #  wordpress:
