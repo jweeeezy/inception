@@ -1,5 +1,4 @@
-# Docker compose v2 file
-# no version cmd needed (if correct version)
+# Docker version 24.0.2 (compose v2)
 
 # @note debugging: could use profiles with prebuild images
 
@@ -16,10 +15,11 @@ services:
     build:
       context: ./srcs/requirements/mariadb
       dockerfile: Dockerfile
+        #restart: always
+    volumes:
+      - mariadb_data:/var/lib/mysql
 
-## wordpress frontend webpage container
-#  wordpress:
-#    depends_on:
-#      mariadb:
-#        condition: service_healthy
+volumes:
+  mariadb_data:
+    driver: local
 
