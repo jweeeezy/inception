@@ -144,7 +144,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-l
 - @note nginx needs to know where certificates are (in config file)
 - e.g.: /etc/nginx/ssl/
 
-- guide for generating ssl cert/key for nginx: (not read)
+- guide for generating ssl cert/key for nginx:
 https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04
 
 #### [TSL/SSL Certification]
@@ -164,4 +164,18 @@ https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl
 - sign our certificate
 
     ` openssl x509 -req -in inceptionhost.csr -signkey inceptionhost.key -out inceptionhost.crt `
+
+#### [MARIADB]
+- all commands are UPPERCASE and are follwed by a ';'
+
+    ` SHOW DATABASES `
+
+    ` USE <database_name> `
+
+    ` SHOW TABLES `
+
+    ` CREATE TABLE <table_name> ( <content_name> TYPE ); `
+
+    ` INSERT INTO your_table_name (column1, column2, column3)
+    VALUES (value1, value2, value3); `
 
