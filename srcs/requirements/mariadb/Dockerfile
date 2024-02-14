@@ -6,4 +6,4 @@ RUN apt-get install mariadb-server -y
 EXPOSE 3306
 
 #@note run consecutively
-CMD ["mysqld"]
+CMD ["mysqld_safe"]
