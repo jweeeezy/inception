@@ -4,7 +4,7 @@ CONTAINER_NAMES = inception-nginx-1 \
 				  inception-mariadb-1 \
 				  #inception-wordpress-1
 
-all: up
+all: build
 	$(MAKE) log > .dockerlogs 2>&1
 up:
 	sudo docker compose up -d
