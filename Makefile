@@ -12,7 +12,7 @@ down:
 	sudo docker compose down
 build:
 	sudo docker compose up --build -d
-re: fclean build
+re: fclean
 	$(MAKE) all
 log:
 	@for container in $(CONTAINER_NAMES); do \
