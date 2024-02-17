@@ -4,8 +4,10 @@ CONTAINER_NAMES = inception-nginx-1 \
 				  inception-mariadb-1 \
 				  #inception-wordpress-1
 
-# command extension for using sudo
+# command extension for using sudo with the current environment (variables)
+# COMPOSE_PROFILES="" -- is needed!
 DOCKER = sudo -E docker
+
 # command extension to use specific .yml file
 COMPOSE = $(DOCKER) compose -f srcs/docker-compose.yml
 
