@@ -12,16 +12,23 @@ DOCKER = sudo -E docker
 # command extension to use specific .yml file
 COMPOSE = $(DOCKER) compose -f srcs/docker-compose.yml
 
-# default make command, starts and logs containers
-.PHONY: all log
+# default command (starts and logs services)
+.PHONY: all
 all: start
 	$(MAKE) log > .dockerlogs 2>&1
 	cat .dockerlogs
+
+# debug commands (logging and attaching with bash)
+.PHONY: log sh
 log:
 	@for container in $(CONTAINER_NAMES); do \
 		printf "\e[33m%s\e[0m\n" "$$container"; \
 		$(DOCKER) logs $$container && echo; \
 		done
+sh:
+	@cat srcs/docker-compose.yml | grep '#' | grep service
+	@read -p "Enter service name: " service; \
+	$(COMPOSE) exec $$service /bin/bash
 
 # main compose handling commands
 .PHONY: start create build stop
