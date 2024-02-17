@@ -6,6 +6,7 @@ CONTAINER_NAMES = inception-nginx-1 \
 
 # command extension for using sudo with the current environment (variables)
 # COMPOSE_PROFILES="" -- is needed!
+# @note might change to default when testing is done
 DOCKER = sudo -E docker
 
 # command extension to use specific .yml file
