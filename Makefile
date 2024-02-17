@@ -4,23 +4,28 @@ CONTAINER_NAMES = inception-nginx-1 \
 				  inception-mariadb-1 \
 				  #inception-wordpress-1
 
-all: build
+# command extension for using sudo
+DOCKER = sudo -E docker
+# command extension to use specific .yml file
+COMPOSE = $(DOCKER) compose -f srcs/docker-compose.yml
+
+all: build up
 	$(MAKE) log > .dockerlogs 2>&1
 up:
-	sudo docker compose up -d
+	$(COMPOSE) up -d
 down:
-	sudo docker compose down
+	$(COMPOSE) down
 build:
-	sudo docker compose up --build -d
+	$(COMPOSE) build
 re: fclean
 	$(MAKE) all
 log:
 	@for container in $(CONTAINER_NAMES); do \
 		printf "\e[33m%s\e[0m\n" "$$container"; \
-		sudo docker logs $$container && echo; \
+		$(DOCKER) logs $$container && echo; \
 		done
 fclean: down
-	sudo docker rmi $$(sudo docker images -qa)
+	$(DOCKER) rmi $(shell $(DOCKER) images -qa)
 
 .PHONY: all up down build re log fclean
 

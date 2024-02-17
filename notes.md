@@ -42,11 +42,29 @@
 
     ` docker compose watch `
 
-- run all containers in detached (background) mode and stop them
+- builds container images
+
+    ` docker compose build `
+
+- creates container of image
+
+    ` docker compose create `
+
+- starts containers
+
+    ` docker compose start `
+
+- creates and starts containers (-d = detached from process, --build = /w build)
 
     ` docker compose up -d `
 
     ` docker compose up --build `
+
+- stops containers
+
+    ` docker compose stop `
+
+- stops and deletes containers
 
     ` docker compose down `
 
