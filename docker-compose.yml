@@ -6,6 +6,7 @@
 
 services:
   nginx: # lightweight webserver
+    profiles: ["default", "server"]
     build:
       context: ./srcs/requirements/nginx
       dockerfile: Dockerfile
@@ -14,6 +15,7 @@ services:
     restart: always
 
   mariadb: # database server
+    profiles: ["default", "db"]
     build:
       context: ./srcs/requirements/mariadb
       dockerfile: Dockerfile
