@@ -7,11 +7,18 @@ FROM debian:11
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install nginx -y
 
-# copies the certificates for the TLS handshake onto container
+# @note wip
+#RUN mkdir /etc/nginx/ssl
+#COPY ./ssl/inceptionhost.crt ./ssl/inceptionhost.key /etc/nginx/ssl/
+
 RUN mkdir /etc/nginx/ssl
-COPY ./ssl/inceptionhost.crt ./ssl/inceptionhost.key /etc/nginx/ssl/
+WORKDIR /etc/nginx/ssl
+COPY openssl.cnf ./
+COPY /tools/create_tls_certificates.sh ./
+RUN ./create_tls_certificates.sh
 
 # copies the custom config file for nginx onto container
+WORKDIR ~
 COPY custom-nginx.conf /etc/nginx/conf.d/
 
 EXPOSE 443
