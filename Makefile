@@ -18,8 +18,8 @@ COMPOSE = $(SUDO) $(PROFILES) docker compose -f srcs/docker-compose.yml
 all: start
 	$(MAKE) log > .dockerlogs 2>&1 ; cat .dockerlogs
 
-# debug commands (logging and attaching with bash)
-.PHONY: log sh
+# debug commands (logging / attaching with bash / make a specific profile)
+.PHONY: log sh profile
 log:
 	@for container in $(CONTAINER_NAMES); do \
 		printf "\e[33m%s\e[0m\n" "$$container"; \
@@ -29,6 +29,9 @@ sh:
 	@cat srcs/docker-compose.yml | grep '#' | grep service
 	@read -p "Enter service name: " service; \
 	$(COMPOSE) exec $$service /bin/bash
+profile:
+	@cat srcs/docker-compose.yml | grep -B 1 "profiles"
+	@read -p "Enter profile name: " profile && export COMPOSE_PROFILES=$$profile && $(MAKE)
 
 # main compose handling commands
 .PHONY: start create build stop
