@@ -1,5 +1,7 @@
 # Docker version 25.0.3 (windows)
 
+# @note add prefix for names
+
 services:
   nginx:    #webserver service
     profiles: ["default", "server"]
@@ -21,6 +23,15 @@ services:
       dockerfile: Dockerfile
     volumes:
       - mariadb_data:/var/lib/mysql
+    restart: always
+
+  wordpress: #php & wordpress service
+    profiles: ["default", "wp"]
+    image: inception_wordpress
+    container_name: inception_wordpress
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
     restart: always
 
 volumes:

@@ -2,7 +2,7 @@
 
 CONTAINER_NAMES = inception_nginx \
                   inception_mariadb \
-				  #inception-wordpress-1
+                  inception-wordpress
 
 # using sudo with env variables
 SUDO = sudo -E
