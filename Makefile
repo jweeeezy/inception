@@ -8,10 +8,8 @@ CONTAINER_NAMES = inception_nginx \
 SUDO = sudo -E
 # using docker with sudo
 DOCKER = $(SUDO) docker
-# using COMPOSE_PROFILES=default ifndef
-PROFILES := COMPOSE_PROFILES=$(shell if [ -z "$$DOCKER_PROFILES" ]; then echo "default"; else echo "$$DOCKER_PROFILES"; fi)
 # using compose with specific .yml file
-COMPOSE = $(SUDO) $(PROFILES) docker compose -f srcs/docker-compose.yml
+COMPOSE = $(SUDO) COMPOSE_PROFILES=$(shell echo $$COMPOSE_PROFILES) docker compose -f srcs/docker-compose.yml
 
 # default command (starts and logs services)
 .PHONY: all
