@@ -1,15 +1,12 @@
 #/ -------------------------------------------------------------------------- //
 
-CONTAINER_NAMES = inception_nginx \
-                  inception_mariadb \
-                  inception-wordpress
-
 # using sudo with env variables
 SUDO = sudo -E
 # using docker with sudo
 DOCKER = $(SUDO) docker
 # using compose with specific .yml file
-COMPOSE = $(SUDO) COMPOSE_PROFILES=$(shell echo $$COMPOSE_PROFILES) docker compose -f srcs/docker-compose.yml
+COMPOSE = $(SUDO) COMPOSE_PROFILES="$(shell echo $$COMPOSE_PROFILES)" \
+		  docker compose -f srcs/docker-compose.yml
 
 # default command (starts and logs services)
 .PHONY: all
@@ -17,12 +14,10 @@ all: start
 	$(MAKE) log > .dockerlogs 2>&1 ; cat .dockerlogs
 
 # debug commands (logging / attaching with bash / make a specific profile)
-.PHONY: log sh profile
-log:
-	@for container in $(CONTAINER_NAMES); do \
-		printf "\e[33m%s\e[0m\n" "$$container"; \
-		$(DOCKER) logs $$container && echo; \
-		done
+.PHONY: log logs sh profile
+log: logs
+logs:
+	$(COMPOSE) logs
 sh:
 	@cat srcs/docker-compose.yml | grep '#' | grep service
 	@read -p "Enter service name: " service; \
