@@ -2,36 +2,37 @@
 
 # @note add prefix for names
 
+name: inception
+
 services:
   nginx:    #webserver service
     profiles: ["default", "server"]
-    image: inception_nginx
-    container_name: inception_nginx
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
+    container_name: container_inception_nginx
     ports:
       - 443:443
     restart: always
 
   mariadb:  #database service
     profiles: ["default", "db"]
-    image: inception_mariadb
-    container_name: inception_mariadb
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
+    container_name: container_inception_mariadb
     volumes:
       - mariadb_data:/var/lib/mysql
+    ports:
+      - 3306:3306
     restart: always
 
   wordpress: #php & wordpress service
     profiles: ["default", "wp"]
-    image: inception_wordpress
-    container_name: inception_wordpress
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
+    container_name: container_inception_wordpress
     restart: always
 
 volumes:
