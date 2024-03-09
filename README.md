@@ -1,5 +1,7 @@
 # Notes
 
+- COMPOSE_PROFILES="default" should be set
+
 ## Makefile<->Docker compose<->Dockerfile
 
 #### [LOG]
