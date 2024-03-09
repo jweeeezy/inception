@@ -3,3 +3,4 @@
 ssl
 .dockerlogs
 *.pem
+info.php
