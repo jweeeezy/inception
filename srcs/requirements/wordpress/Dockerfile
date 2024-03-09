@@ -15,4 +15,5 @@ COPY . /var/html/www
 EXPOSE 9000
 
 # start php as main process
-CMD ["php-fpm8", "-F"]
+#CMD ["php-fpm7.4", "-F"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
