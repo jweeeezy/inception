@@ -1,6 +1,5 @@
 # Docker version 25.0.3 (windows)
-
-# @note add prefix for names
+# Docker version 26.0.2, build 3c863ff
 
 name: inception
 
@@ -10,35 +9,30 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-    container_name: container_inception_mariadb
-    environment:
-      DATABASE_NAME: $DATABASE_NAME
-      DATABASE_ROOT: $DATABASE_ROOT
-      DATABASE_USER: $DATABASE_USER
-      DATABASE_PASSWORD: $DATABASE_PASSWORD
+    container_name: mariadb
     volumes:
       - mariadb_data:/var/lib/mysql
     ports:
       - 3306:3306
     restart: always
 
-      # wordpress: #php & wordpress service
-      #   profiles: ["default", "wp"]
-      #   build:
-      #     context: ./requirements/wordpress
-      #     dockerfile: Dockerfile
-      #   container_name: container_inception_wordpress
-      #   restart: always
-  
-      # nginx:    #webserver service
-      #   profiles: ["default", "server"]
-      #   build:
-      #     context: ./requirements/nginx
-      #     dockerfile: Dockerfile
-      #   container_name: container_inception_nginx
-      #   ports:
-      #     - 443:443
-      #   restart: always
+# wordpress: #php & wordpress service
+#   profiles: ["default", "wp"]
+#   build:
+#     context: ./requirements/wordpress
+#     dockerfile: Dockerfile
+#   container_name: container_inception_wordpress
+#   restart: always
+
+# nginx:    #webserver service
+#   profiles: ["default", "server"]
+#   build:
+#     context: ./requirements/nginx
+#     dockerfile: Dockerfile
+#   container_name: container_inception_nginx
+#   ports:
+#     - 443:443
+#   restart: always
 
 volumes:
   mariadb_data:
@@ -46,5 +40,16 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/jakob/data/mariadb
-      #device: "/home/jwillert/data/wordpress"
+      device: $HOME/data/mariadb
+
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $HOME/data/wordpress
+
+networks:
+    inception:
+        name: inception
+        driver: bridge
