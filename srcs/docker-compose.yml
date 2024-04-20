@@ -11,6 +11,11 @@ services:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
     container_name: container_inception_mariadb
+    environment:
+      DATABASE_NAME: $DATABASE_NAME
+      DATABASE_ROOT: $DATABASE_ROOT
+      DATABASE_USER: $DATABASE_USER
+      DATABASE_PASSWORD: $DATABASE_PASSWORD
     volumes:
       - mariadb_data:/var/lib/mysql
     ports:
@@ -34,7 +39,6 @@ services:
       #   ports:
       #     - 443:443
       #   restart: always
-
 
 volumes:
   mariadb_data:
