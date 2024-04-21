@@ -10,8 +10,13 @@ COMPOSE = $(SUDO) COMPOSE_PROFILES="$(shell echo $$COMPOSE_PROFILES)" \
 
 # default command (starts and logs services)
 .PHONY: all
-all: start
+all: volumes start
 	$(MAKE) log > .dockerlogs 2>&1 ; cat .dockerlogs
+
+# @note make this more beautiful
+volumes:
+	sudo mkdir -p $$HOME/data/wordpress
+	sudo mkdir -p $$HOME/data/mariadb
 
 # debug commands (logging / attaching with bash / make a specific profile)
 .PHONY: log logs sh profile
@@ -37,7 +42,7 @@ build:
 stop:
 	$(COMPOSE) stop
 
-# cleaning commands and rebuild (re) command
+# cleaning commands and rebuild command (re)
 .PHONY: stop down clean fclean re
 down:
 	$(COMPOSE) down
