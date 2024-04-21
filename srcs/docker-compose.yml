@@ -9,6 +9,7 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
+    image: mariadb
     container_name: mariadb
     volumes:
       - mariadb_data:/var/lib/mysql
@@ -17,14 +18,17 @@ services:
     restart: always
 
   wordpress: #php & wordpress service
-     profiles: ["default", "wp"]
-     build:
-       context: ./requirements/wordpress
-       dockerfile: Dockerfile
-     container_name: wordpress
-     ports:
-        - 9000:9000
-     restart: always
+    profiles: ["default", "wp"]
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    image: wordpress
+    container_name: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+       - 9000:9000
+    restart: always
 
 volumes:
   mariadb_data:
@@ -43,8 +47,8 @@ volumes:
 
 networks:
     inception:
-        name: inception
-        driver: bridge
+      name: inception
+      driver: bridge
 
 # nginx:    #webserver service
 #   profiles: ["default", "server"]
