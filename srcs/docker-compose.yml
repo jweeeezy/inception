@@ -2,6 +2,7 @@
 # Docker version 26.0.2, build 3c863ff (vms)
 
 #@note add whitespaces to arrange values?
+#@note mariadb socket?
 
 name: inception
 
@@ -16,6 +17,7 @@ services:
     restart: always
     volumes:
       - mariadb_data:/var/lib/mysql
+      - mariadb_socket:/run/mysqld
     env_file:
       - .env
     networks:
@@ -33,6 +35,7 @@ services:
     restart: always
     volumes:
       - wordpress_data:/var/www/html
+      - mariadb_socket:/run/mysqld
     env_file:
       - .env
     networks:
@@ -54,6 +57,9 @@ volumes:
       type: none
       o: bind
       device: $HOME/data/wordpress
+
+  mariadb_socket:
+    name: mariadb_socket
 
 networks:
     inception:
