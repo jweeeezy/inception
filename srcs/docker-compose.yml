@@ -16,6 +16,8 @@ services:
     ports:
       - 3306:3306
     restart: always
+    networks:
+      - inception
 
   wordpress: #php & wordpress service
     profiles: ["default", "wp"]
@@ -29,6 +31,8 @@ services:
     ports:
        - 9000:9000
     restart: always
+    networks:
+      - inception
 
 volumes:
   mariadb_data:
