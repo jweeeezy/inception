@@ -3,6 +3,9 @@
 # penultimate latest version as of 01/14/2024
 FROM debian:11
 
+# create directory for wordpress files
+WORKDIR /var/www/html
+
 # installation of all necessary tools
 RUN apt-get update -y && apt-get upgrade -y && mkdir -p /tmp/
 COPY --chmod=755 ./tools/php_install.sh /tmp/php_install.sh
