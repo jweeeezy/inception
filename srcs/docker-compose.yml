@@ -1,5 +1,5 @@
 # Docker version 25.0.3 (windows)
-# Docker version 26.0.2, build 3c863ff
+# Docker version 26.0.2, build 3c863ff (vms)
 
 name: inception
 
@@ -16,23 +16,15 @@ services:
       - 3306:3306
     restart: always
 
-# wordpress: #php & wordpress service
-#   profiles: ["default", "wp"]
-#   build:
-#     context: ./requirements/wordpress
-#     dockerfile: Dockerfile
-#   container_name: container_inception_wordpress
-#   restart: always
-
-# nginx:    #webserver service
-#   profiles: ["default", "server"]
-#   build:
-#     context: ./requirements/nginx
-#     dockerfile: Dockerfile
-#   container_name: container_inception_nginx
-#   ports:
-#     - 443:443
-#   restart: always
+  wordpress: #php & wordpress service
+     profiles: ["default", "wp"]
+     build:
+       context: ./requirements/wordpress
+       dockerfile: Dockerfile
+     container_name: wordpress
+     ports:
+        - 9000:9000
+     restart: always
 
 volumes:
   mariadb_data:
@@ -53,3 +45,13 @@ networks:
     inception:
         name: inception
         driver: bridge
+
+# nginx:    #webserver service
+#   profiles: ["default", "server"]
+#   build:
+#     context: ./requirements/nginx
+#     dockerfile: Dockerfile
+#   container_name: container_inception_nginx
+#   ports:
+#     - 443:443
+#   restart: always
