@@ -8,6 +8,7 @@ WORKDIR /var/www/html
 
 # installation of all necessary tools
 RUN apt-get update -y && apt-get upgrade -y && mkdir -p /tmp/
+RUN apt-get install -y mariadb-client
 COPY --chmod=755 ./tools/php_install.sh /tmp/php_install.sh
 COPY --chmod=755 ./tools/wp_install.sh /tmp/wp_install.sh
 RUN /tmp/php_install.sh && /tmp/wp_install.sh
