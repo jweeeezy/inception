@@ -15,13 +15,13 @@ services:
     image: mariadb
     container_name: mariadb
     restart: always
+    environment:
+      - MYSQL_ROOT_HOST=%
     volumes:
       - mariadb_data:/var/lib/mysql
       - mariadb_socket:/run/mysqld
     env_file:
       - .env
-    networks:
-      - inception
     ports:
       - 3306:3306
 
@@ -38,8 +38,6 @@ services:
       - mariadb_socket:/run/mysqld
     env_file:
       - .env
-    networks:
-      - inception
     ports:
       - 9000:9000
     depends_on:
@@ -64,7 +62,7 @@ volumes:
     name: mariadb_socket
 
 networks:
-    inception:
+    default:
       name: inception
       driver: bridge
 
