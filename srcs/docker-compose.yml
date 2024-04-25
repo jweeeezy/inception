@@ -1,12 +1,10 @@
 # Docker version 25.0.3 (windows)
 # Docker version 26.0.2, build 3c863ff (vms)
 
-#@note add whitespaces to arrange values?
-#@note mariadb socket?
-
 name: inception
 
 services:
+
   mariadb:  #database service
     profiles: ["default", "db"]
     build:
@@ -15,8 +13,6 @@ services:
     image: mariadb
     container_name: mariadb
     restart: always
-    environment:
-      - MYSQL_ROOT_HOST=%
     volumes:
       - mariadb_data:/var/lib/mysql
       - mariadb_socket:/run/mysqld
@@ -43,6 +39,21 @@ services:
     depends_on:
       - mariadb
 
+  nginx: #webserver service
+    profiles: ["default", "ws"]
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    image: nginx
+    container_name: nginx
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - 443:443
+    restart: always
+    depends_on:
+      - wordpress
+
 volumes:
   mariadb_data:
     driver: local
@@ -65,13 +76,3 @@ networks:
     default:
       name: inception
       driver: bridge
-
-# nginx:    #webserver service
-#   profiles: ["default", "server"]
-#   build:
-#     context: ./requirements/nginx
-#     dockerfile: Dockerfile
-#   container_name: container_inception_nginx
-#   ports:
-#     - 443:443
-#   restart: always
