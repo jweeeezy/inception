@@ -1,55 +1,42 @@
 #/ -------------------------------------------------------------------------- //
 
-# using sudo with env variables
-SUDO = sudo -E
-# using docker with sudo
-DOCKER = $(SUDO) docker
-# using compose with specific .yml file
-COMPOSE = $(SUDO) COMPOSE_PROFILES="$(shell echo $$COMPOSE_PROFILES)" \
-		  docker compose -f srcs/docker-compose.yml
+DOCKER             = sudo -E docker
+COMPOSE            = $(DOCKER) compose -f srcs/docker-compose.yml
+WORDPRESS_DATA_DIR = $$HOME/data/wordpress
+MARIADB_DATA_DIR   = $$HOME/data/mariadb
 
-# default command (starts and logs services)
-.PHONY: all
-all: volumes start
-	$(MAKE) log > .dockerlogs 2>&1 ; cat .dockerlogs
+.PHONY: all create build volumes down clean fclean re log logs sh
 
-# @note make this more beautiful
+all:    volumes create
+	$(COMPOSE) start
+	$(MAKE) log > .logs 2>&1
+
+create: build
+	$(COMPOSE) create
+
+build:
+	$(COMPOSE) build
+
 volumes:
-	sudo mkdir -p $$HOME/data/wordpress
-	sudo mkdir -p $$HOME/data/mariadb
+	sudo mkdir -p $(WORDPRESS_DATA_DIR)
+	sudo mkdir -p $(MARIADB_DATA_DIR)
 
-# debug commands (logging / attaching with bash / make a specific profile)
-.PHONY: log logs sh profile
-log: logs
+down:
+	$(COMPOSE) down
+
+fclean: down
+	$(DOCKER) rmi $(shell $(DOCKER) images -qa) || echo "fclean: no images to clean!"
+	sudo rm -rf $$HOME/data/wordpress $$HOME/data/mariadb
+
+re:     fclean
+	$(MAKE) all
+
 logs:
 	$(COMPOSE) logs
+
 sh:
 	@cat srcs/docker-compose.yml | grep '#' | grep service
 	@read -p "Enter service name: " service; \
 	$(COMPOSE) exec $$service /bin/bash
-profile:
-	@cat srcs/docker-compose.yml | grep -B 1 "profiles"
-	@read -p "Enter profile name: " profile && export COMPOSE_PROFILES=$$profile && $(MAKE)
-
-# main compose handling commands
-.PHONY: start create build stop
-start: create
-	$(COMPOSE) start
-create:
-	$(COMPOSE) create
-build:
-	$(COMPOSE) build
-stop:
-	$(COMPOSE) stop
-
-# cleaning commands and rebuild command (re)
-.PHONY: stop down clean fclean re
-down:
-	$(COMPOSE) down
-clean: down
-fclean: down
-	$(DOCKER) rmi $(shell $(DOCKER) images -qa) || echo "fclean: no images to clean!"
-re: fclean build
-	$(MAKE) all
 
 #/ -------------------------------------------------------------------------- //
