@@ -1,7 +1,7 @@
 #only allowed to store locally
-*.env
 ssl
-.dockerlogs
 *.pem
+.dockerlogs
 info.php
-*secret.txt
+.secrets*
+*.env

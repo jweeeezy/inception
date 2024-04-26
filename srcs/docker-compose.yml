@@ -4,7 +4,6 @@
 name: inception
 
 services:
-
   mariadb:  #database service
     profiles: ["default", "db"]
     build:
@@ -18,6 +17,9 @@ services:
       - mariadb_socket:/run/mysqld
     env_file:
       - .env
+    secrets:
+      - wordpress_user_password
+      - wordpress_root_password
     ports:
       - 3306:3306
 
@@ -34,6 +36,9 @@ services:
       - mariadb_socket:/run/mysqld
     env_file:
       - .env
+    secrets:
+      - wordpress_user_password
+      - wordpress_root_password
     ports:
       - 9000:9000
     depends_on:
@@ -71,6 +76,12 @@ volumes:
 
   mariadb_socket:
     name: mariadb_socket
+
+secrets:
+  wordpress_user_password:
+    file: ./.secrets_wp_user
+  wordpress_root_password:
+    file: ./.secrets_wp_root
 
 networks:
     default:
