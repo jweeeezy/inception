@@ -26,10 +26,6 @@ RUN apt-get update -y \
     WORKDIR ~
     COPY conf/custom-nginx.conf /etc/nginx/conf.d/
 
-    # setup php
-    COPY conf/info.php /var/www/html/info.php
-    RUN chown -R $USER:$USER /var/www/html/info.php
-
 #   <----
 
 # starts nginx as a foreground process without the daemon so it keeps running
