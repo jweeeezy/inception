@@ -5,3 +5,5 @@ ssl
 info.php
 .secrets*
 *.env
+env
+.inception_init

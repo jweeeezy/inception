@@ -17,8 +17,9 @@ services:
     env_file:
       - .env
     secrets:
+      - mariadb_root_password
       - wordpress_user_password
-      - wordpress_root_password
+      - wordpress_admin_password
     ports:
       - 3306:3306
 
@@ -36,7 +37,7 @@ services:
       - .env
     secrets:
       - wordpress_user_password
-      - wordpress_root_password
+      - wordpress_admin_password
     ports:
       - 9000:9000
     depends_on:
@@ -75,10 +76,12 @@ volumes:
     name: mariadb_socket
 
 secrets:
+  mariadb_root_password:
+    file: ../secrets/.secrets_db_root
   wordpress_user_password:
-    file: ./.secrets_wp_user
-  wordpress_root_password:
-    file: ./.secrets_wp_root
+    file: ../secrets/.secrets_wp_user
+  wordpress_admin_password:
+    file: ../secrets/.secrets_wp_admin
 
 networks:
     default:

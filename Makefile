@@ -4,35 +4,51 @@ DOCKER             = sudo -E docker
 COMPOSE            = $(DOCKER) compose -f srcs/docker-compose.yml
 WORDPRESS_DATA_DIR = $$HOME/data/wordpress
 MARIADB_DATA_DIR   = $$HOME/data/mariadb
+TOOLS_DIR          = srcs/requirements/tools/
+INIT_MARKER        = .inception_init
+BUILD_MARKER       = .inception_images_built
+CREATED_MARKER     = .inception_container_created
 
-.PHONY: all create build volumes down clean fclean re log logs sh
+.PHONY: all create build down clean fclean re logs sh
 
-all:    volumes create
+all: init create
 	$(COMPOSE) start
-	$(MAKE) log > .logs 2>&1
+	$(MAKE) logs
+
+init: $(INIT_MARKER)
+
+$(INIT_MARKER):
+	cd $(TOOLS_DIR) && ./inception_init.sh
+	touch $(INIT_MARKER)
 
 create: build
 	$(COMPOSE) create
+	touch $(CREATED_MARKER)
 
 build:
 	$(COMPOSE) build
-
-volumes:
-	sudo mkdir -p $(WORDPRESS_DATA_DIR)
-	sudo mkdir -p $(MARIADB_DATA_DIR)
+	touch $(BUILD_MARKER)
 
 down:
-	$(COMPOSE) down
+	$(COMPOSE) down || true
 
-fclean: down
-	$(DOCKER) rmi $(shell $(DOCKER) images -qa) || echo "fclean: no images to clean!"
-	sudo rm -rf $$HOME/data/wordpress $$HOME/data/mariadb
+clean: down
+	$(DOCKER) rmi $(shell $(DOCKER) images -qa) || true
+	rm $(CREATED_MARKER) || true
+	rm $(BUILD_MARKER) || true
 
-re:     fclean
+fclean: clean
+	sudo rm -rf $$HOME/data/wordpress $$HOME/data/mariadb || true
+	rm .logs || true
+	rm secrets/.secrets_* || true
+	rm srcs/.env || true
+	rm $(INIT_MARKER) || true
+
+re: fclean
 	$(MAKE) all
 
 logs:
-	$(COMPOSE) logs
+	$(COMPOSE) logs > .logs
 
 sh:
 	@cat srcs/docker-compose.yml | grep '#' | grep service
