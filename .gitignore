@@ -1,9 +1,8 @@
 #only allowed to store locally
-ssl
-*.pem
-.logs
-info.php
-.secrets*
-*.env
 env
 .inception_init
+.inception_images_built
+.inception_container_created
+.logs
+.secrets*
+*.env
