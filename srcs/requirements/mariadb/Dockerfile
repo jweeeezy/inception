@@ -7,8 +7,8 @@ RUN apt-get update -y \
     && apt-get upgrade -y \
     && apt-get install mariadb-server -y
 COPY ./conf/my.cnf /etc/mysql/my.cnf
-COPY ./tools/init.sql /etc/mysql/init.sql
+COPY --chmod=755 ./tools/init.sh /tmp/init.sh
 
 EXPOSE 3306
 
-ENTRYPOINT [ "mariadbd", "--init-file", "/etc/mysql/init.sql" ]
+ENTRYPOINT [ "/tmp/init.sh" ]
