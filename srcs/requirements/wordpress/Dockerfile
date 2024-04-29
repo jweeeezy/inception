@@ -10,8 +10,11 @@ RUN apt-get update -y \
     && mkdir -p /var/www/html
 COPY --chmod=755 ./tools/php_install.sh /tmp/php_install.sh
 COPY --chmod=755 ./tools/wp_install.sh /tmp/wp_install.sh
+COPY --chmod=755 ./tools/wp_init.sh /tmp/wp_init.sh
 RUN /tmp/php_install.sh && /tmp/wp_install.sh
+
+WORKDIR /var/www/html
 
 EXPOSE 9000
 
-ENTRYPOINT ["php-fpm8.3", "-F"]
+ENTRYPOINT [ "/tmp/wp_init.sh" ]
