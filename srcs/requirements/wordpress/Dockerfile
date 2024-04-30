@@ -11,6 +11,7 @@ RUN apt-get update -y \
 COPY --chmod=755 ./tools/php_install.sh /tmp/php_install.sh
 COPY --chmod=755 ./tools/wp_install.sh /tmp/wp_install.sh
 COPY --chmod=755 ./tools/wp_init.sh /tmp/wp_init.sh
+COPY ./conf/www.conf /tmp/www.conf
 RUN /tmp/php_install.sh && /tmp/wp_install.sh
 
 WORKDIR /var/www/html
