@@ -14,17 +14,16 @@ RUN apt-get update -y \
 
 #   ---->
 
-    # @note abstract this into a script
-    # create key and self signed certificate
-    RUN mkdir /etc/nginx/ssl
-    WORKDIR /etc/nginx/ssl
-    COPY conf/openssl.cnf ./
-    COPY /tools/create_tls_certificates.sh ./
-    RUN ./create_tls_certificates.sh
+# @note abstract this into a script
+# create key and self signed certificate
+RUN mkdir /etc/nginx/ssl
+WORKDIR /etc/nginx/ssl
+COPY conf/openssl.cnf ./
+COPY /tools/create_tls_certificates.sh ./
+RUN ./create_tls_certificates.sh
 
-    # copy nginx config file
-    WORKDIR ~
-    COPY conf/custom-nginx.conf /etc/nginx/conf.d/
+# copy nginx config file
+COPY conf/custom-nginx.conf /etc/nginx/conf.d/
 
 #   <----
 
