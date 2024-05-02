@@ -161,7 +161,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-l
 
 - have to setup TLS which is a way to guarantee a secure connection between
 - two applications (mb OPEN SSL)
-- @note nginx needs to know where certificates are (in config file)
+- nginx needs to know where certificates are (in config file)
 - e.g.: /etc/nginx/ssl/
 
 - guide for generating ssl cert/key for nginx:

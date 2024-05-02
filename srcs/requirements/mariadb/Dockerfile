@@ -2,7 +2,6 @@
 
 FROM debian:11
 
-# @note sure if creating dir is needed 
 RUN apt-get update -y \
     && apt-get upgrade -y \
     && apt-get install mariadb-server -y
