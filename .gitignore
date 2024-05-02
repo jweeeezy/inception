@@ -1,8 +1,11 @@
-#only allowed to store locally
-env
+# Makefile build markers
 .inception_init
 .inception_images_built
 .inception_container_created
+
+# Docker compose log
 .logs
+
+# Environment variables and credentials for container
+.env
 .secrets*
-*.env
