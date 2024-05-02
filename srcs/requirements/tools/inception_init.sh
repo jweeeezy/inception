@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# this script is responsible for:
+# - prompting user for each env variable / docker secret
+# - setting up the .env file with necessary variables
+# - setting up the docker secret files (credentials)
+
 ENV_FILE="../../../srcs/.env"
 SECRET_DB_ROOT_FILE="../../../secrets/.secrets_db_root"
 SECRET_WP_ADMIN_FILE="../../../secrets/.secrets_wp_admin"

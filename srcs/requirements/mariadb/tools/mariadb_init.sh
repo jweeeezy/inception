@@ -1,7 +1,6 @@
 #!/bin/bash
 
 MARIADB_ROOT_PASSWORD=$(cat /run/secrets/mariadb_root_password)
-
 DEST_FILE=/etc/mysql/init.sql
 
 echo "CREATE DATABASE IF NOT EXISTS $MARIADB_DB_NAME;" > "$DEST_FILE"

@@ -1,10 +1,21 @@
-# Docker version 25.0.3 (windows)
-# Docker version 26.0.2, build 3c863ff (vms)
+# docker version 26.0.2 on ubuntu 22.04
+
+# docker-compose != docker compose
+# docker-compose migrated to docker compose v2
+# version 3. and older are considered compose v1
+# version statement is obsolete as of v2
+
+# this file is responsible for:
+# - setting up project, image and container names
+# - setting up start up order (mariadb -> wordpress -> nginx)
+# - setting up docker network and exposing ports
+# - setting up volumes (so files are shared)
+# - submitting environment variables and secrets (passwords) to container FS
 
 name: inception
 
 services:
-  mariadb:  #database service
+  mariadb:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
@@ -23,7 +34,7 @@ services:
     ports:
       - 3306:3306
 
-  wordpress: #php & wordpress service
+  wordpress:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
@@ -44,7 +55,7 @@ services:
     depends_on:
       - mariadb
 
-  nginx: #webserver service
+  nginx:
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile

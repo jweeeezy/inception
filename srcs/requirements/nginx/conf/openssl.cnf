@@ -1,5 +1,3 @@
-### Config file for openssl (TLS key and certificate generation)
-
 [req]
 distinguished_name = req_distinguished_name
 prompt = no
