@@ -15,4 +15,6 @@ wp core install --allow-root --path="/var/www/html" --url=https://jwillert.42.fr
 wp user create --allow-root $WORDPRESS_USER_NAME "willertjakob@gmail.com" \
     --role=author --user_pass="$WORDPRESS_USER_PASSWORD"
 
+chown -R www-data:www-data /var/www/html
+
 exec php-fpm8.3 -F
