@@ -6,9 +6,6 @@ MARIADB_ROOT_PASSWORD=$(cat /run/secrets/mariadb_root_password)
 
 rm /var/www/html/wp-config.php || true
 
-# @note mb add a healthcheck instead
-#sleep 10
-
 wp config create --allow-root --path="/var/www/html" \
     --dbname="$MARIADB_DB_NAME" --dbuser="$MARIADB_ROOT_USER_NAME" --dbpass="$MARIADB_ROOT_PASSWORD" --dbhost=mariadb
 
