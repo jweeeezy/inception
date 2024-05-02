@@ -6,9 +6,12 @@
 # - setting up the docker secret files (credentials)
 
 ENV_FILE="../../../srcs/.env"
+
 SECRET_DB_ROOT_FILE="../../../secrets/.secrets_db_root"
+SECRET_DB_USER_FILE="../../../secrets/.secrets_db_user"
 SECRET_WP_ADMIN_FILE="../../../secrets/.secrets_wp_admin"
 SECRET_WP_USER_FILE="../../../secrets/.secrets_wp_user"
+
 WORDPRESS_DATA_DIR="$HOME/data/wordpress"
 MARIADB_DATA_DIR="$HOME/data/mariadb"
 
@@ -83,8 +86,10 @@ main(){
     check_for_file $SECRET_WP_USER_FILE || ask_for_reinit
 
     read_and_create_file "Enter the database name: " "MARIADB_DB_NAME" "$ENV_FILE"
-    read_and_append_to_file "Enter the database root username: " "MARIADB_ROOT_USER_NAME" "$ENV_FILE"
     read_and_create_secret_file "Enter the database root password: " "MARIADB_ROOT_PASSWORD" "$SECRET_DB_ROOT_FILE"
+
+    read_and_append_to_file "Enter the database user name: " "MARIADB_USER_NAME" "$ENV_FILE"
+    read_and_create_secret_file "Enter the database user password: " "MARIADB_USER_PASSWORD" "$SECRET_DB_USER_FILE"
 
     read_and_append_to_file "Enter the wordpress admin username: " "WORDPRESS_ADMIN_NAME" "$ENV_FILE"
     read_and_create_secret_file "Enter the wordpress admin password: " "WORDPRESS_ADMIN_PASSWORD" "$SECRET_WP_ADMIN_FILE"

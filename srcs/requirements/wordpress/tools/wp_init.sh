@@ -2,12 +2,12 @@
 
 WORDPRESS_ADMIN_PASSWORD=$(cat /run/secrets/wordpress_admin_password)
 WORDPRESS_USER_PASSWORD=$(cat /run/secrets/wordpress_user_password)
-MARIADB_ROOT_PASSWORD=$(cat /run/secrets/mariadb_root_password)
+MARIADB_USER_PASSWORD=$(cat /run/secrets/mariadb_user_password)
 
 rm /var/www/html/wp-config.php || true
 
 wp config create --allow-root --path="/var/www/html" \
-    --dbname="$MARIADB_DB_NAME" --dbuser="$MARIADB_ROOT_USER_NAME" --dbpass="$MARIADB_ROOT_PASSWORD" --dbhost=mariadb
+    --dbname="$MARIADB_DB_NAME" --dbuser="$MARIADB_USER_NAME" --dbpass="$MARIADB_USER_PASSWORD" --dbhost=mariadb
 
 wp core install --allow-root --path="/var/www/html" --url=https://jwillert.42.fr \
 	--admin_user="$WORDPRESS_ADMIN_NAME" --admin_password="$WORDPRESS_ADMIN_PASSWORD" \
