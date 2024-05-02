@@ -23,11 +23,9 @@ $(INIT_MARKER):
 
 create: build
 	$(COMPOSE) create
-	touch $(CREATED_MARKER)
 
 build:
 	$(COMPOSE) build
-	touch $(BUILD_MARKER)
 
 down:
 	$(COMPOSE) down || true
@@ -54,7 +52,7 @@ logs:
 	$(COMPOSE) logs > .logs
 
 sh:
-	@cat srcs/docker-compose.yml | grep '#' | grep service
+	$(COMPOSE) convert --services
 	@read -p "Enter service name: " service; \
 	$(COMPOSE) exec $$service /bin/bash
 
